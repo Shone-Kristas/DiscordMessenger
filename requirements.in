@@ -1,0 +1,7 @@
+sqlalchemy
+alembic
+python-dotenv
+asyncpg
+psycopg2
+FastAPI
+pandas

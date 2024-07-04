@@ -1,0 +1,5 @@
+.env
+.idea/
+__pycache__/
+user_data.csv
+accounts_upload.csv
