@@ -2,6 +2,8 @@ sqlalchemy
 alembic
 python-dotenv
 asyncpg
-psycopg2
+psycopg2-binary
 FastAPI
 pandas
+apscheduler
+requests

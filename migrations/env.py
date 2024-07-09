@@ -7,8 +7,9 @@ from alembic import context
 
 from models.models import metadata
 
-from config import DB_HOST, DB_NAME, DB_USER, DB_PASS
 
+from src.config import DB_HOST, DB_NAME, DB_USER, DB_PASS
+from src.database import AsyncSessionLocal, engine
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -61,26 +62,24 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 
-def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
-
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
-    """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
-
-    with connectable.connect() as connection:
+async def run_migrations_online() -> None:
+    async with engine.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection,
+            target_metadata=target_metadata,
+            transactional_ddl=True,  # Используйте transactional DDL
         )
 
-        with context.begin_transaction():
-            context.run_migrations()
+        async with AsyncSessionLocal() as session:
+            context.configure(
+                connection=connection,
+                target_metadata=target_metadata,
+                transactional_ddl=True,
+                session=session,
+            )
+
+            async with context.begin_transaction():
+                context.run_migrations()
 
 
 if context.is_offline_mode():

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Sending Accounts</title>
+</head>
+<body>
+    <h1>Discord Messanger</h1>
+    <h2>Upload Sending Accounts</h2>
+    <form action="/upload-sending-accounts/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <br><br>
+        <button type="submit">Upload File</button>
+    </form>
+    <h2>Upload Recipient Accounts</h2>
+    <form action="/upload-recipient-accounts/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <br><br>
+        <button type="submit">Upload File</button>
+    </form>
+    <h2>Upload Message</h2>
+    <form action="/upload-message/" method="post" enctype="multipart/form-data">
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+        <br><br>
+        <label for="time">Time (HH:MM format):</label><br>
+        <input type="text" id="time" name="time" pattern="[0-9]{2}:[0-9]{2}" placeholder="HH:MM" required>
+        <br><br>
+        <button type="submit">Upload Message and Time</button>
+    </form>
+</body>
+</html>
