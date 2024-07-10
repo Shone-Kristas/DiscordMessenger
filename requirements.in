@@ -7,3 +7,5 @@ FastAPI
 pandas
 apscheduler
 requests
+pytest
+responses
